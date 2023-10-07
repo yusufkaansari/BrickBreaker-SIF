@@ -16,6 +16,9 @@ public class Ball : MonoBehaviour
     [SerializeField]
     Transform explosion;
 
+    [SerializeField]
+    GameManager gm;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +48,8 @@ public class Ball : MonoBehaviour
             // inPlay false yapilarak, topun paddle e geri donmesi saglanir
             // boylece top un caný 1 azalmis olunur
             inPlay = false;
+
+            gm.UpdateLives(-1);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -54,9 +59,10 @@ public class Ball : MonoBehaviour
             Transform smokepuff = Instantiate(explosion, collision.transform.position, Quaternion.identity);
             var main = smokepuff.GetComponent<ParticleSystem>().main;
             main.startColor = new ParticleSystem.MinMaxGradient(Color.gray,collision.gameObject.GetComponent<SpriteRenderer>().color);
-
+            gm.UpdateScore(collision.gameObject.GetComponent<Brick>().points);
             Destroy(collision.gameObject);
             Destroy(smokepuff.gameObject, 1f);
+
         }
     }
 
