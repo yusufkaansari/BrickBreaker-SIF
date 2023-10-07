@@ -13,6 +13,9 @@ public class Ball : MonoBehaviour
     [SerializeField]
     float speed;
 
+    [SerializeField]
+    Transform explosion;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,4 +47,17 @@ public class Ball : MonoBehaviour
             inPlay = false;
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("brick"))
+        {
+            Transform smokepuff = Instantiate(explosion, collision.transform.position, Quaternion.identity);
+            var main = smokepuff.GetComponent<ParticleSystem>().main;
+            main.startColor = new ParticleSystem.MinMaxGradient(Color.gray,collision.gameObject.GetComponent<SpriteRenderer>().color);
+
+            Destroy(collision.gameObject);
+            Destroy(smokepuff.gameObject, 1f);
+        }
+    }
+
 }
