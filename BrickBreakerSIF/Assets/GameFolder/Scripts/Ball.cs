@@ -31,12 +31,6 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gm.gameOver)
-        {
-            rb.velocity = Vector2.zero;
-            // update methodu durdurmaya yarar, the ball no longer moves
-            return;
-        }
         if (!inPlay)
         {
             transform.position = ballOnPaddle.position;
@@ -51,14 +45,15 @@ public class Ball : MonoBehaviour
     {
         if (other.CompareTag("bottom"))
         {
-            //Debug.Log("Ball hit the bottom of the screen");
-            // Ball nesnesi hareketsizlestirilir:
-            rb.velocity = Vector2.zero;
-            // inPlay false yapilarak, topun paddle e geri donmesi saglanir
-            // boylece top un caný 1 azalmis olunur
-            inPlay = false;
-
             gm.UpdateLives(-1);
+            if (gm.GetLives() > 0)
+            {
+                SetInPlay();                
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
+            }
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -89,6 +84,15 @@ public class Ball : MonoBehaviour
             }
 
         }
+    }
+    public void SetInPlay()
+    {
+        //Debug.Log("Ball hit the bottom of the screen");
+        // Ball nesnesi hareketsizlestirilir:
+        rb.velocity = Vector2.zero;
+        // inPlay false yapilarak, topun paddle e geri donmesi saglanir
+        // boylece top un caný 1 azalmis olunur
+        inPlay = false;
     }
 
 }

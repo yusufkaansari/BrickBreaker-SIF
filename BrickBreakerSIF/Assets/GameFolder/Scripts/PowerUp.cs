@@ -22,7 +22,6 @@ public class PowerUp : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("bottom"))
         {
-            Debug.Log("çalisti");
             Destroy(gameObject);
         }
     }

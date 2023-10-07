@@ -10,20 +10,36 @@ public class GameManager : MonoBehaviour
     int lives, score;
 
     [SerializeField]
-    Text livesText, scoreText;
+    Text livesText,levelText, scoreText, nextLevelText;
 
-    public bool gameOver;
 
     [SerializeField]
     GameObject gameOverPanel;
 
+    [SerializeField]
+    GameObject nextLevelPanel;
+
     public int numberOfBricks;
+
+    [SerializeField]
+    Transform[] levels;
+
+    [SerializeField]
+    int currentLevelIndex=0;
+
+    Ball ball;
+
     // Start is called before the first frame update
     void Start()
     {
         livesText.text = "Lives: " + lives;
         scoreText.text = "Score: " + score;
         numberOfBricks = GameObject.FindGameObjectsWithTag("brick").Length;
+        ball = FindObjectOfType<Ball>();
+
+        
+        LoadLevel();
+
     }
 
     // Update is called once per frame
@@ -39,7 +55,7 @@ public class GameManager : MonoBehaviour
         if (lives <=0)
         {
             lives = 0;
-            GameOver();
+            Invoke("GameOver", 1f);
         }
         livesText.text = "Lives: " + lives;
     }
@@ -54,16 +70,53 @@ public class GameManager : MonoBehaviour
         numberOfBricks--;
         if (numberOfBricks <=0)
         {
-            GameOver();
+            if (currentLevelIndex < levels.Length)
+            {
+                Invoke("OpenNextLevelPanel", 1f);
+            }
+            else
+            {
+                Invoke("GameOver", 1f);
+            }
+
         }
+    }
+    public int GetLives()
+    {
+        return lives;
     }
     void GameOver()
     {
-        gameOver = true;
-        gameOverPanel.SetActive(true);
+        Time.timeScale = 0;
+        gameOverPanel.SetActive(true);        
+    }
+    void LoadLevel()
+    {
+        levelText.text = "Level " + (currentLevelIndex + 1);
+        nextLevelPanel.SetActive(false);
+        Instantiate(levels[currentLevelIndex].gameObject, transform.position, Quaternion.identity);
+        numberOfBricks = GameObject.FindGameObjectsWithTag("brick").Length;
+        currentLevelIndex++;
+        
+
+    }
+    void OpenNextLevelPanel()
+    {
+        ball.GetComponent<Ball>().SetInPlay();
+        Time.timeScale = 0;
+        nextLevelPanel.SetActive(true);
+        nextLevelText.text = "Next Level " + (currentLevelIndex + 1);
+        
+    }
+    public void NextLevel()
+    {        
+        LoadLevel();
+        Time.timeScale = 1;
+
     }
     public void PlayAgain()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Game");
     }
     public void QuitGame()

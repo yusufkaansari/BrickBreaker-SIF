@@ -25,11 +25,7 @@ public class Paddle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gm.gameOver)
-        {
-            // update methodu durdurmaya yarar, the ball no longer moves
-            return;
-        }
+
         float horizontal = Input.GetAxis("Horizontal");
         transform.Translate(Vector2.right * horizontal * Time.deltaTime * speed);
 
