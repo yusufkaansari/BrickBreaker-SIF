@@ -37,4 +37,13 @@ public class Paddle : MonoBehaviour
         pos.x = Mathf.Clamp(pos.x, -maxX, maxX);
         transform.position = pos;
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.CompareTag("extraLife"))
+        {
+            gm.UpdateLives(1);
+            Destroy(collision.gameObject);
+        }
+        
+    }
 }

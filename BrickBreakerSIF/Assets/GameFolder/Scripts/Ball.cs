@@ -19,6 +19,9 @@ public class Ball : MonoBehaviour
     [SerializeField]
     GameManager gm;
 
+    [SerializeField]
+    Transform powerup;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,7 @@ public class Ball : MonoBehaviour
     {
         if (gm.gameOver)
         {
+            rb.velocity = Vector2.zero;
             // update methodu durdurmaya yarar, the ball no longer moves
             return;
         }
@@ -61,6 +65,12 @@ public class Ball : MonoBehaviour
     {
         if (collision.transform.CompareTag("brick"))
         {
+            int randChance = Random.Range(1, 101);
+            if (randChance < 25)
+            {
+                Instantiate(powerup, collision.transform.position, collision.transform.rotation);
+            }
+
             Transform smokepuff = Instantiate(explosion, collision.transform.position, Quaternion.identity);
             var main = smokepuff.GetComponent<ParticleSystem>().main;
             main.startColor = new ParticleSystem.MinMaxGradient(Color.gray,collision.gameObject.GetComponent<SpriteRenderer>().color);
