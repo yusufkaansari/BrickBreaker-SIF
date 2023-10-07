@@ -51,6 +51,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5368888940862543838, guid: 8225a3f3fb7956e45b2500ce809972be, type: 3}
+      propertyPath: hitSprite
+      value: 
+      objectReference: {fileID: 902604414080901960, guid: 15c3c5c917ebc544fb14656146212022, type: 3}
+    - target: {fileID: 5368888940862543838, guid: 8225a3f3fb7956e45b2500ce809972be, type: 3}
+      propertyPath: hitsToBreak
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5368888940862543838, guid: 8225a3f3fb7956e45b2500ce809972be, type: 3}
+      propertyPath: hitSprite.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5368888940862543838, guid: 8225a3f3fb7956e45b2500ce809972be, type: 3}
+      propertyPath: hitSprite.Array.data[0]
+      value: 
+      objectReference: {fileID: 902604414080901960, guid: 15c3c5c917ebc544fb14656146212022, type: 3}
+    - target: {fileID: 5368888940862543838, guid: 8225a3f3fb7956e45b2500ce809972be, type: 3}
+      propertyPath: hitSprite.Array.data[1]
+      value: 
+      objectReference: {fileID: 5844472475735661674, guid: 92d26b8d18858a245adefd7829568201, type: 3}
     - target: {fileID: 7387517060209068148, guid: 8225a3f3fb7956e45b2500ce809972be, type: 3}
       propertyPath: m_Sprite
       value: 

@@ -65,20 +65,28 @@ public class Ball : MonoBehaviour
     {
         if (collision.transform.CompareTag("brick"))
         {
-            int randChance = Random.Range(1, 101);
-            if (randChance < 25)
+            Brick brickScript = collision.gameObject.GetComponent<Brick>();
+            if (brickScript.hitsToBreak > 1)
             {
-                Instantiate(powerup, collision.transform.position, collision.transform.rotation);
+                brickScript.BreakBrick();
             }
+            else
+            {
+                int randChance = Random.Range(1, 101);
+                if (randChance < 25)
+                {
+                    Instantiate(powerup, collision.transform.position, collision.transform.rotation);
+                }
 
-            Transform smokepuff = Instantiate(explosion, collision.transform.position, Quaternion.identity);
-            var main = smokepuff.GetComponent<ParticleSystem>().main;
-            main.startColor = new ParticleSystem.MinMaxGradient(Color.gray,collision.gameObject.GetComponent<SpriteRenderer>().color);
+                Transform smokepuff = Instantiate(explosion, collision.transform.position, Quaternion.identity);
+                var main = smokepuff.GetComponent<ParticleSystem>().main;
+                main.startColor = new ParticleSystem.MinMaxGradient(Color.gray, collision.gameObject.GetComponent<SpriteRenderer>().color);
 
-            gm.UpdateScore(collision.gameObject.GetComponent<Brick>().points);
-            gm.UpdateNumberOfBricks();
-            Destroy(collision.gameObject);
-            Destroy(smokepuff.gameObject, 1f);
+                gm.UpdateScore(brickScript.points);
+                gm.UpdateNumberOfBricks();
+                Destroy(collision.gameObject);
+                Destroy(smokepuff.gameObject, 1f);
+            }
 
         }
     }
