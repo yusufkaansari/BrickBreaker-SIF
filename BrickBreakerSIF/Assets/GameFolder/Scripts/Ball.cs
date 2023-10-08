@@ -22,10 +22,13 @@ public class Ball : MonoBehaviour
     [SerializeField]
     Transform powerup;
 
+    AudioSource audio;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -82,7 +85,7 @@ public class Ball : MonoBehaviour
                 Destroy(collision.gameObject);
                 Destroy(smokepuff.gameObject, 1f);
             }
-
+            audio.Play();
         }
     }
     public void SetInPlay()
