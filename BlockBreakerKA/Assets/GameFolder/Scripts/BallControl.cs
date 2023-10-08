@@ -54,7 +54,7 @@ public class BallControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Vector2 ufakSapma = new Vector2(Random.Range(0f, 0.3f), Random.Range(0f, 0.3f));
+        Vector2 ufakSapma = new Vector2(Random.Range(0.3f, 0f), Random.Range(0f, 0.3f));
         if (oyunBasladiMi && !collision.gameObject.CompareTag("Breakable"))
         {
             audioSource.Play();

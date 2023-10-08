@@ -65,7 +65,8 @@ public class Bloklar : MonoBehaviour
         {
             blokyokolma.Play();
             GameObject efektimiz = Instantiate(efekt, gameObject.transform.position, Quaternion.identity) as GameObject;
-            efektimiz.GetComponent<ParticleSystem>().startColor = spriteRenderer.color;
+            var main = efektimiz.GetComponent<ParticleSystem>().main;
+            main.startColor = spriteRenderer.color;
 
             Destroy(gameObject);
             blockSayisi--;
