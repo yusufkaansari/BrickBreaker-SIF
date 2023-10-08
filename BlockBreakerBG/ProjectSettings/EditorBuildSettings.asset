@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/PlayScreen.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Level_01.unity
+    guid: 51bcc0a196c53bb42b7e7737fc92ea08
+  - enabled: 1
+    path: Assets/Scenes/LooseScreen.unity
+    guid: 9116d50b5c0770f4c8b319a0211b3996
+  m_configObjects: {}
