@@ -9,17 +9,30 @@ public class PaddleControl : MonoBehaviour
 
     float colliderEnYarim;
 
+    BallControl oyundakiTop;
+
+    [SerializeField]
+    bool otomatikOynama = false;
 
     // Start is called before the first frame update
     void Start()
     {
         GetHalfSpritePaddle();
+        oyundakiTop = FindObjectOfType<BallControl>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        MovePaddleMouse();
+        if (otomatikOynama)
+        {
+            MoveOtomatic();
+        }
+        else
+        {
+
+            MovePaddleMouse();
+        }
         StayOnScreen();
     }
 
@@ -41,6 +54,12 @@ public class PaddleControl : MonoBehaviour
         mPosition = Camera.main.ScreenToWorldPoint(mPosition);
         mPosition.y = transform.position.y;
         transform.position = mPosition;
+    }
+    void MoveOtomatic()
+    {
+        Vector3 topPosition = oyundakiTop.transform.position;
+        topPosition.y = transform.position.y;
+        transform.position = topPosition;
     }
     void GetHalfSpritePaddle()
     {

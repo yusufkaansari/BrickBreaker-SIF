@@ -9,8 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Oyun.unity
-    guid: 34144f8f3e82bf7478a6cf251e75cb6b
+    path: Assets/Scenes/Level 1.unity
+    guid: 541d3a4798b0daf44abb64b18177f4a9
+  - enabled: 1
+    path: Assets/Scenes/Level 2.unity
+    guid: 4f7a2b8287f7fdb47b4cffb631de0bc8
   - enabled: 1
     path: Assets/Scenes/OyunBitti.unity
     guid: 4f50a0127cbb5dc469d4dde0fe99c825

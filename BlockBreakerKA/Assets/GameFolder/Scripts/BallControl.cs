@@ -10,7 +10,12 @@ public class BallControl : MonoBehaviour
     Vector3 ToplaBarArasindakiMesafe;
     float colliderBoyYarim;
     Rigidbody2D body;
+    SahneKontrol sahneKontrol;
 
+    float _ballHiz;
+    public float BallHiz { get => _ballHiz; }
+
+    AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,20 +23,42 @@ public class BallControl : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         TopOyunBariUstunde();
         ToplaBarArasindakiMesafe = transform.position - oyunBari.transform.position;
+        sahneKontrol = FindObjectOfType<SahneKontrol>();
+
+        audioSource = GetComponent<AudioSource>();
     }
+
 
     // Update is called once per frame
     void Update()
     {
         if (!oyunBasladiMi)
-        {
-            
+        {            
             transform.position = oyunBari.transform.position + ToplaBarArasindakiMesafe;
-        }
-        if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
+            {
+                oyunBasladiMi = true;
+                body.AddForce(new Vector2(2f, 8f),ForceMode2D.Impulse);
+            }
+        } else
         {
-            oyunBasladiMi = true;
-            body.velocity = new Vector2(3f, 9f);
+            _ballHiz = body.velocity.magnitude;
+            if (Bloklar.blockSayisi <= 0)
+            {
+                sahneKontrol.SonrakiSahne();
+            }
+            
+        }
+        
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Vector2 ufakSapma = new Vector2(Random.Range(0f, 0.3f), Random.Range(0f, 0.3f));
+        if (oyunBasladiMi && !collision.gameObject.CompareTag("Breakable"))
+        {
+            audioSource.Play();
+            body.velocity += ufakSapma;
         }
     }
 
