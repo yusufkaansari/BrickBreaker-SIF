@@ -27,4 +27,17 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Quit Requested");
         Application.Quit();
     }
+    public void BrickDestroyed()
+    {
+        if (BlockController.breakableNumber<=0)
+        {
+            LoadNextLevel();
+        }
+    }
+    public void LoadNextLevel()
+    {
+        BlockController.breakableNumber = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+    }
 }
