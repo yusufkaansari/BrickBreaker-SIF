@@ -38,7 +38,7 @@ public class BallControl : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 oyunBasladiMi = true;
-                body.AddForce(new Vector2(2f, 8f),ForceMode2D.Impulse);
+                body.AddForce(new Vector2(2f, 5f),ForceMode2D.Impulse);
             }
         } else
         {
@@ -54,7 +54,7 @@ public class BallControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Vector2 ufakSapma = new Vector2(Random.Range(0.3f, 0f), Random.Range(0f, 0.3f));
+        Vector2 ufakSapma = new Vector2(Random.Range(0f, 0.3f), Random.Range(0f, 0.3f));
         if (oyunBasladiMi && !collision.gameObject.CompareTag("Breakable"))
         {
             audioSource.Play();

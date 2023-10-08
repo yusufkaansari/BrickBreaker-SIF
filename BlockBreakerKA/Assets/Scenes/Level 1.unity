@@ -522,6 +522,10 @@ PrefabInstance:
       propertyPath: blokSayisiText
       value: 
       objectReference: {fileID: 192766487}
+    - target: {fileID: 979076591, guid: 030b1ba3b665b1c4fbea8a756767879d, type: 3}
+      propertyPath: m_Volume
+      value: 0.136
+      objectReference: {fileID: 0}
     - target: {fileID: 4553966532299856416, guid: 030b1ba3b665b1c4fbea8a756767879d, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -735,6 +739,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3600632511026169307, guid: be5938a457792bd4990b3134c860b643, type: 3}
       propertyPath: otomatikOynama
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3600632511676266364, guid: be5938a457792bd4990b3134c860b643, type: 3}
+      propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3600632512542053066, guid: be5938a457792bd4990b3134c860b643, type: 3}
