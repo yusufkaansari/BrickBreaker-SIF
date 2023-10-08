@@ -10,8 +10,7 @@ public class GameManager : MonoBehaviour
     int lives, score;
 
     [SerializeField]
-    Text livesText,levelText, scoreText, nextLevelText;
-
+    Text livesText,levelText, scoreText, nextLevelText, highScoreText;
 
     [SerializeField]
     GameObject gameOverPanel;
@@ -29,6 +28,8 @@ public class GameManager : MonoBehaviour
 
     Ball ball;
 
+    [SerializeField]
+    InputField highScoreInput;
     // Start is called before the first frame update
     void Start()
     {
@@ -86,9 +87,10 @@ public class GameManager : MonoBehaviour
         return lives;
     }
     void GameOver()
-    {
+    {        
         Time.timeScale = 0;
-        gameOverPanel.SetActive(true);        
+        gameOverPanel.SetActive(true);
+        WriteHighscore();
     }
     void LoadLevel()
     {
@@ -107,6 +109,27 @@ public class GameManager : MonoBehaviour
         nextLevelPanel.SetActive(true);
         nextLevelText.text = "Next Level " + (currentLevelIndex + 1);
         
+    }
+    void WriteHighscore()
+    {
+        int highScore = PlayerPrefs.GetInt("HIGHSCORE");
+        if (score > highScore)
+        {
+            PlayerPrefs.SetInt("HIGHSCORE", score);
+            highScoreText.text = "New High Score! " + score +"\n"+ "Enter your name below:";
+            highScoreInput.gameObject.SetActive(true);
+        }
+        else
+        {
+            highScoreText.text = PlayerPrefs.GetString("HIGHSCORENAME")+ "'s High Score " + highScore +"\n"+"Can you beat it?";
+        }
+    }
+    public void NewHighScore()
+    {
+        string highScoreName = highScoreInput.text;
+        PlayerPrefs.SetString("HIGHSCORENAME", highScoreName);
+        highScoreInput.gameObject.SetActive(false);
+        highScoreText.text = "Congratulations " + highScoreName + "\n" + "Your New High Score is " + score;
     }
     public void NextLevel()
     {        

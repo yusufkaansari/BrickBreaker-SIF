@@ -11,7 +11,7 @@ public class Paddle : MonoBehaviour
     [SerializeField]
     GameManager gm;
 
-    AudioSource audio;
+    AudioSource audioPaddle;
     private void Awake()
     {
         height = Camera.main.orthographicSize;
@@ -24,7 +24,7 @@ public class Paddle : MonoBehaviour
         paddleWidth = GetComponent<SpriteRenderer>().bounds.extents.x;
         maxX = width - paddleWidth;
 
-        audio = GetComponent<AudioSource>();
+        audioPaddle = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class Paddle : MonoBehaviour
     {
         if (collision.transform.CompareTag("extraLife"))
         {
-            audio.Play();
+            audioPaddle.Play();
             gm.UpdateLives(1);
             Destroy(collision.gameObject);
         }
