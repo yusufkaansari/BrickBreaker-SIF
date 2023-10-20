@@ -11,7 +11,7 @@ public class Ball : MonoBehaviour
     Transform ballOnPaddle;
 
     [SerializeField]
-    float speed;
+    public float speed;
 
     [SerializeField]
     Transform explosion;
